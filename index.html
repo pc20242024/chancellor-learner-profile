@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="version" content="v2.1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -294,6 +295,19 @@ function showResults(){
 }
 
 function retake(){ cur=0; ans=Array(25).fill(null); go('s-intro'); }
+</script>
+
+<script>
+function notifyHeight() {
+  var h = document.body.scrollHeight;
+  window.parent.postMessage({ height: h }, '*');
+}
+// Fire on load and whenever content changes
+window.addEventListener('load', notifyHeight);
+var observer = new MutationObserver(notifyHeight);
+observer.observe(document.body, { childList: true, subtree: true });
+// Also fire periodically as a fallback
+setInterval(notifyHeight, 500);
 </script>
 </body>
 </html>
