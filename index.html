@@ -298,5 +298,28 @@ function retake(){ cur=0; ans=Array(25).fill(null); go('s-intro'); }
 </script>
 
 
+
+<script>
+(function() {
+  function sendHeight() {
+    var body = document.body;
+    var html = document.documentElement;
+    var height = Math.max(
+      body.scrollHeight, body.offsetHeight,
+      html.clientHeight, html.scrollHeight, html.offsetHeight
+    );
+    window.parent.postMessage({ frameHeight: height }, '*');
+  }
+  // Send on load
+  window.addEventListener('load', sendHeight);
+  // Send whenever DOM changes (screen switches etc)
+  new MutationObserver(sendHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  // Send on resize
+  window.addEventListener('resize', sendHeight);
+  // Send every 300ms as fallback
+  setInterval(sendHeight, 300);
+})();
+</script>
+
 </body>
 </html>
