@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learner Profile Assessment – Chancellor Institute</title>
+<style>
+/* Reset everything so parent site CSS cannot bleed in */
+html, body {
+  all: unset;
+  display: block;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 16px;
+}
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  background: #f2f3f5 !important;
+  color: #1a1a1a !important;
+  min-height: 100vh;
+  display: block !important;
+}
+
+/* Header */
+.ci-header {
+  background: #00274C !important;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 4px solid #FFCB05;
+}
+.ci-header-name {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Container */
+.ci-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+/* Hero */
+.ci-hero {
+  background: #00274C !important;
+  border-radius: 14px;
+  padding: 2.25rem 1.75rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.ci-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: #FFCB05;
+}
+.ci-hero h1 {
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  color: #FFCB05 !important;
+  margin-bottom: 10px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  line-height: 1.3;
+}
+.ci-hero p {
+  font-size: 14px !important;
+  color: #ffffff !important;
+  line-height: 1.65;
+  max-width: 440px;
+  margin: 0 auto 1.25rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-dims-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.ci-pill {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,203,5,.5);
+  color: #FFCB05 !important;
+  background: rgba(255,203,5,.1) !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-meta {
+  font-size: 12px !important;
+  color: rgba(255,255,255,.5) !important;
+  margin-bottom: 1.5rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-start-btn {
+  background: #FFCB05 !important;
+  border: none !important;
+  color: #00274C !important;
+  padding: 13px 44px;
+  border-radius: 8px;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+}
+.ci-start-btn:hover { background: #e8b800 !important; }
+
+/* Progress */
+.ci-pbar-wrap { margin-bottom: 0; }
+.ci-pbar {
+  height: 4px;
+  background: #dde3ee;
+  border-radius: 2px;
+  overflow: hidden;
+  margin: 1.25rem 0 4px;
+}
+.ci-pfill {
+  height: 100%;
+  background: #FFCB05;
+  border-radius: 2px;
+  transition: width .4s ease;
+}
+.ci-plabel {
+  font-size: 12px !important;
+  color: #888 !important;
+  text-align: right;
+  margin-bottom: 10px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Question card */
+.ci-qcard {
+  background: #ffffff !important;
+  border: 1.5px solid #e0e4ed;
+  border-top: 3px solid #FFCB05;
+  border-radius: 0 0 12px 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.ci-badge {
+  display: inline-block;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.d-CU { background: #FFF8DC !important; color: #7A5F00 !important; border: 1px solid #FFCB05 !important; }
+.d-MO { background: #E8EEF6 !important; color: #00274C !important; border: 1px solid #00274C !important; }
+.d-CO { background: #FFF8DC !important; color: #7A5F00 !important; border: 1px solid #FFCB05 !important; }
+.d-IM { background: #E8EEF6 !important; color: #00274C !important; border: 1px solid #00274C !important; }
+.d-PR { background: #FFF8DC !important; color: #7A5F00 !important; border: 1px solid #FFCB05 !important; }
+
+.ci-qtxt {
+  font-size: 16px !important;
+  line-height: 1.65;
+  color: #1a1a1a !important;
+  margin-bottom: 1.25rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px !important;
+  color: #999 !important;
+  margin-bottom: 8px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-scale {
+  display: flex;
+  gap: 6px;
+}
+.ci-sb {
+  flex: 1;
+  height: 46px;
+  border-radius: 8px;
+  border: 1.5px solid #d0d5e0 !important;
+  background: #ffffff !important;
+  color: #555 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-sb:hover { background: #FFF8DC !important; border-color: #FFCB05 !important; color: #7A5F00 !important; }
+.ci-sb.sel  { background: #00274C !important; border-color: #00274C !important; color: #FFCB05 !important; }
+
+/* Nav */
+.ci-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.ci-btn-back {
+  background: none !important;
+  border: 1.5px solid #d0d5e0 !important;
+  color: #555 !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px !important;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-btn-back:hover { background: #eee !important; }
+.ci-btn-next {
+  background: #00274C !important;
+  border: none !important;
+  color: #FFCB05 !important;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-btn-next:hover { background: #001a35 !important; }
+.ci-btn-next:disabled { background: #dde3ee !important; color: #aaa !important; cursor: not-allowed; }
+
+/* Results */
+.ci-res-title {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #00274C !important;
+  margin-bottom: 4px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-res-sub {
+  font-size: 14px !important;
+  color: #666 !important;
+  margin-bottom: 1.25rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ci-arch-card {
+  background: #00274C !important;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+}
+.ci-arch-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: #FFCB05;
+}
+.ci-arch-ico {
+  width: 54px; height: 54px;
+  border-radius: 10px;
+  background: rgba(255,203,5,.15) !important;
+  border: 1px solid rgba(255,203,5,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 26px;
+  color: #FFCB05 !important;
+}
+.ci-arch-name {
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #FFCB05 !important;
+  margin-bottom: 5px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-arch-desc {
+  font-size: 13px !important;
+  color: #ffffff !important;
+  line-height: 1.65;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ci-dims-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+.ci-dim-card {
+  background: #ffffff !important;
+  border: 1px solid #e0e4ed;
+  border-radius: 10px;
+  padding: 1rem;
+}
+.ci-dim-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.ci-dim-label {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #1a1a1a !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-dbar-bg {
+  height: 5px;
+  background: #e8eef6;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.ci-dbar-fill { height: 100%; border-radius: 3px; }
+.ci-dim-note {
+  font-size: 12px !important;
+  color: #666 !important;
+  line-height: 1.5;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+.ci-progs-title {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #00274C !important;
+  margin-bottom: 10px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-prog {
+  background: #ffffff !important;
+  border: 1px solid #e0e4ed !important;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none !important;
+  color: inherit !important;
+}
+.ci-prog:hover { border-color: #00274C !important; }
+.ci-prog-ico {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.ci-prog-name {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-prog-why {
+  font-size: 12px !important;
+  color: #666 !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-fit-badge {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  padding: 4px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  margin-left: auto;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.fit-h { background: #00274C !important; color: #FFCB05 !important; }
+.fit-m { background: #E8EEF6 !important; color: #00274C !important; }
+
+.ci-cta-card {
+  background: #FFF8DC !important;
+  border: 1.5px solid #FFCB05;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 1.25rem;
+}
+.ci-cta-p {
+  font-size: 14px !important;
+  color: #7A5F00 !important;
+  margin-bottom: 12px;
+  font-weight: 600 !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-cta-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.ci-cta-a {
+  background: #00274C !important;
+  border: none !important;
+  color: #FFCB05 !important;
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  text-decoration: none !important;
+  display: inline-block;
+}
+.ci-cta-a:hover { background: #001a35 !important; }
+.ci-cta-b {
+  background: none !important;
+  border: 2px solid #00274C !important;
+  color: #00274C !important;
+  padding: 11px 24px;
+  border-radius: 8px;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  cursor: pointer;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  text-decoration: none !important;
+  display: inline-block;
+}
+.ci-cta-b:hover { background: #e8eef6 !important; }
+
+.ci-retake {
+  text-align: center;
+  margin-top: 14px;
+}
+.ci-retake button {
+  background: none !important;
+  border: none !important;
+  color: #00274C !important;
+  font-size: 13px !important;
+  cursor: pointer;
+  text-decoration: underline;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+/* Footer */
+.ci-footer {
+  background: #00274C !important;
+  text-align: center;
+  padding: 18px;
+  font-size: 12px !important;
+  color: rgba(255,255,255,.5) !important;
+  border-top: 3px solid #FFCB05;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+.ci-footer a {
+  color: #FFCB05 !important;
+  text-decoration: none !important;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .ci-dims-grid { grid-template-columns: 1fr; }
+  .ci-hero h1 { font-size: 20px !important; }
+  .ci-scale { gap: 4px; }
+  .ci-sb { height: 42px; font-size: 13px !important; }
+  .ci-arch-card { flex-direction: column; }
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+</head>
+<body>
+
+<header class="ci-header">
+  <svg width="34" height="40" viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 1L37 7V22.5C37 32.5 29 40 20 43C11 40 3 32.5 3 22.5V7L20 1Z" fill="#00274C"/>
+    <path d="M20 1L37 7V22.5C37 32.5 29 40 20 43C11 40 3 32.5 3 22.5V7L20 1Z" fill="none" stroke="#FFCB05" stroke-width="2.5"/>
+    <path d="M20 4.5L34 9.5V22.5C34 31 27 37.5 20 40C13 37.5 6 31 6 22.5V9.5L20 4.5Z" fill="none" stroke="#FFCB05" stroke-width="1.2"/>
+    <path d="M27 14.5C25.5 13.2 22.9 12.5 20 12.5C14.5 12.5 10 17 10 22.5V24C10 29.5 14.5 34 20 34C22.9 34 25.5 33.3 27 32" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <path d="M27 14.5C25.5 13.2 22.9 12.5 20 12.5C14.5 12.5 10 17 10 22.5V24C10 29.5 14.5 34 20 34C22.9 34 25.5 33.3 27 32" stroke="#FFCB05" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  </svg>
+  <span class="ci-header-name">Chancellor Institute</span>
+</header>
+
+<div class="ci-wrap">
+
+  <!-- INTRO -->
+  <div id="s-intro">
+    <div class="ci-hero">
+      <h1>Find your learner profile</h1>
+      <p>Answer 25 questions and discover how you think, work, and grow — then see which Chancellor programs are built for someone like you.</p>
+      <div class="ci-dims-row">
+        <span class="ci-pill">Curiosity drive</span>
+        <span class="ci-pill">Momentum style</span>
+        <span class="ci-pill">Collaboration mode</span>
+        <span class="ci-pill">Impact orientation</span>
+        <span class="ci-pill">Pressure response</span>
+      </div>
+      <div class="ci-meta">25 questions &middot; about 4 minutes &middot; no sign-up needed</div>
+      <button class="ci-start-btn" onclick="go('s-test')">Begin your assessment</button>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="s-test" style="display:none;">
+    <div class="ci-pbar-wrap">
+      <div class="ci-pbar"><div class="ci-pfill" id="pfill" style="width:4%"></div></div>
+      <div class="ci-plabel" id="plabel">Question 1 of 25</div>
+    </div>
+    <div class="ci-qcard">
+      <div class="ci-badge" id="qdim"></div>
+      <div class="ci-qtxt" id="qtext"></div>
+      <div class="ci-scale-labels"><span>Not like me at all</span><span>Very much like me</span></div>
+      <div class="ci-scale" id="qscale"></div>
+    </div>
+    <div class="ci-nav">
+      <button class="ci-btn-back" id="bbk" onclick="prev()">&#8592; Back</button>
+      <button class="ci-btn-next" id="bnx" onclick="next()" disabled>Next &#8594;</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="s-results" style="display:none;">
+    <div id="results-body"></div>
+  </div>
+
+</div>
+
+<footer class="ci-footer">
+  &copy; Chancellor Institute &nbsp;&middot;&nbsp;
+  <a href="https://chancellor.education" target="_blank" rel="noopener">chancellor.education</a>
+</footer>
+
+<script>
+const Qs=[
+  {d:'CU',t:'When I encounter a topic I know nothing about, my first instinct is to dig deeper rather than move on.'},
+  {d:'CU',t:'I often find myself researching things far beyond what any assignment or task requires.'},
+  {d:'CU',t:'I enjoy the feeling of not knowing something yet — it means there is something to discover.'},
+  {d:'CU',t:'I ask "why does this work?" more often than "how do I use this?"'},
+  {d:'CU',t:'I get energised when a new subject challenges assumptions I already held.'},
+  {d:'MO',t:'I work best when I have a clear plan and know what each step looks like before I begin.'},
+  {d:'MO',t:'I tend to make steady, consistent progress rather than working in bursts of intense effort.'},
+  {d:'MO',t:'I set milestones for myself even when no one asks me to.'},
+  {d:'MO',t:'I feel uncomfortable starting something if I do not understand the full scope first.'},
+  {d:'MO',t:'I find it easier to focus when there is structure around me rather than open-ended freedom.'},
+  {d:'CO',t:'Working through a problem with others energises me more than working alone.'},
+  {d:'CO',t:'I often notice when someone in a group feels unheard and try to bring them into the conversation.'},
+  {d:'CO',t:'I learn more from a conversation with peers than from reading the same material solo.'},
+  {d:'CO',t:'I am comfortable giving direct, constructive feedback to someone I am working with.'},
+  {d:'CO',t:'Building relationships with mentors and industry professionals matters a great deal to me.'},
+  {d:'IM',t:'I need to feel that what I am studying will eventually make a real difference to people or the world.'},
+  {d:'IM',t:'I am more motivated by the purpose behind a project than by the mark or recognition I might receive.'},
+  {d:'IM',t:'I think about the long-term consequences of ideas, not just their immediate applications.'},
+  {d:'IM',t:'I feel drawn to problems that most people overlook or consider too hard to solve.'},
+  {d:'IM',t:'I want my career to stand for something, not just provide a comfortable income.'},
+  {d:'PR',t:'When a deadline or plan shifts unexpectedly, I adapt quickly rather than feeling destabilised.'},
+  {d:'PR',t:'I tend to perform at my best precisely when the stakes are highest.'},
+  {d:'PR',t:'I am comfortable starting a task even when the requirements are still unclear.'},
+  {d:'PR',t:'I recover quickly after a setback and look for what I can learn from it.'},
+  {d:'PR',t:'Uncertainty motivates me to think more creatively rather than shutting me down.'},
+];
+const LABELS={CU:'Curiosity drive',MO:'Momentum style',CO:'Collaboration mode',IM:'Impact orientation',PR:'Pressure response'};
+const DCLS={CU:'d-CU',MO:'d-MO',CO:'d-CO',IM:'d-IM',PR:'d-PR'};
+const DCLRS={CU:'#FFCB05',MO:'#00274C',CO:'#FFCB05',IM:'#00274C',PR:'#FFCB05'};
+const DNOTES={
+  CU:['You prefer applying proven frameworks to solve defined problems — a grounded and valuable strength.','You balance focused application with moments of deep exploration.','Learning is its own reward for you — you are driven by what you do not yet know.'],
+  MO:['You thrive in focused sprints and produce your best work under defined pressure.','You balance creative flow with enough structure to stay on track.','Clear structure and step-by-step progress are where you excel.'],
+  CO:['Independent, self-directed work is where your best thinking emerges.','You value deep solo work and meaningful collaboration in equal measure.','Collective thinking and building ideas with others is where you come alive.'],
+  IM:['You are motivated by craft, mastery, and excellence in the work itself.','You care about doing exceptional work and contributing to something larger.','The purpose behind your work is what keeps you committed long after others quit.'],
+  PR:['You work best in predictable, well-defined environments with clear expectations.','You manage pressure steadily, adapting when needed without losing focus.','Uncertainty and high stakes sharpen your thinking and bring out your very best.'],
+};
+const ARCHETYPES=[
+  {id:'The Architect',icon:'ti-building-arch',range:[0,39],desc:'You bring precision and structure to everything you touch. You build carefully, think systematically, and create things built to last. You are the person others rely on to make ideas real and resilient.'},
+  {id:'The Navigator',icon:'ti-compass',range:[40,49],desc:'You orient quickly in new territory and chart a course with confidence. You blend curiosity with practicality — exploring boldly, then executing deliberately.'},
+  {id:'The Catalyst',icon:'ti-bolt',range:[50,59],desc:'You spark ideas, energise teams, and push projects forward when others stall. Your drive for impact is genuine and your energy is contagious. You make things happen.'},
+  {id:'The Pathfinder',icon:'ti-telescope',range:[60,69],desc:'You are drawn to edges — of knowledge, convention, and what is currently possible. You ask the questions others have not thought to ask yet. You are at home in uncharted territory.'},
+  {id:'The Steward',icon:'ti-heart-handshake',range:[70,79],desc:'You build trust, nurture communities, and hold the long view. Your leadership is steady and sustainable. You create environments where everyone rises.'},
+  {id:'The Synthesiser',icon:'ti-hierarchy-2',range:[80,125],desc:'You draw connections across domains others treat as separate. You thrive in complexity and bring an integrative perspective that is rare and genuinely valuable.'},
+];
+const PROGRAMS=[
+  {name:'Doctor of Philosophy in Leadership',level:'Doctoral',icon:'ti-certificate',url:'http://chancellor.education/phd-leadership',match:s=>s.IM>65&&s.CU>60&&s.CO>55?'h':'m',why:'For those driven to lead transformational change'},
+  {name:'Executive MBA',level:'Masters',icon:'ti-briefcase',url:'http://chancellor.education/emba',match:s=>s.MO>55&&s.IM>55&&s.PR>50?'h':'m',why:'Industry-led leadership for ambitious executives'},
+  {name:'Graduate Certificate in Healthcare Management',level:'Graduate certificate',icon:'ti-heart',url:'http://chancellor.education/grad-cert-healthcare-management',match:s=>s.CO>60&&s.IM>65?'h':'m',why:'Lead with purpose in a high-impact sector'},
+  {name:'International Master in Artificial Intelligence',level:'Masters',icon:'ti-circuit-board',url:'https://chancellor.education/international-master-in-ai/',match:s=>s.CU>65&&s.MO>55?'h':'m',why:'Curious, analytical minds shaping tomorrow\'s technology'},
+  {name:'International MBA',level:'Masters',icon:'ti-world',url:'https://chancellor.education/international-mba/',match:s=>s.CO>55&&s.PR>55&&s.IM>50?'h':'m',why:'Global business thinking across borders and cultures'},
+  {name:'International Master in Fashion Management',level:'Masters',icon:'ti-sparkles',url:'https://chancellor.education/master-fashion-management/',match:s=>s.CU>60&&s.IM>55&&s.CO>50?'h':'m',why:'Where creativity meets industry and cultural impact'},
+  {name:'International Master in Arts and Culture Management',level:'Masters',icon:'ti-palette',url:'https://chancellor.education/international-master-in-arts-culture-management/',match:s=>s.CU>65&&s.CO>55&&s.IM>55?'h':'m',why:'Shape the cultural institutions of the future'},
+];
+
+let cur=0, ans=Array(25).fill(null);
+
+function go(id){
+  ['s-intro','s-test','s-results'].forEach(s=>{document.getElementById(s).style.display='none';});
+  document.getElementById(id).style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='s-test') render();
+}
+
+function render(){
+  const q=Qs[cur];
+  document.getElementById('pfill').style.width=Math.round(((cur+1)/25)*100)+'%';
+  document.getElementById('plabel').textContent='Question '+(cur+1)+' of 25';
+  const db=document.getElementById('qdim');
+  db.textContent=LABELS[q.d]; db.className='ci-badge '+DCLS[q.d];
+  document.getElementById('qtext').textContent=q.t;
+  const sc=document.getElementById('qscale'); sc.innerHTML='';
+  [1,2,3,4,5].forEach(v=>{
+    const b=document.createElement('button');
+    b.className='ci-sb'+(ans[cur]===v?' sel':'');
+    b.textContent=v;
+    b.onclick=()=>{ans[cur]=v;render();document.getElementById('bnx').disabled=false;};
+    sc.appendChild(b);
+  });
+  document.getElementById('bbk').style.visibility=cur===0?'hidden':'visible';
+  const nx=document.getElementById('bnx');
+  nx.disabled=ans[cur]===null;
+  nx.textContent=cur===24?'See my profile →':'Next →';
+}
+
+function next(){if(cur<24){cur++;render();}else showResults();}
+function prev(){if(cur>0){cur--;render();document.getElementById('bnx').disabled=false;}}
+
+function showResults(){
+  const scores={CU:0,MO:0,CO:0,IM:0,PR:0},counts={CU:0,MO:0,CO:0,IM:0,PR:0};
+  Qs.forEach((q,i)=>{if(ans[i]!==null){scores[q.d]+=ans[i];counts[q.d]++;}});
+  const pct={};
+  Object.keys(scores).forEach(k=>pct[k]=counts[k]?Math.round((scores[k]/(counts[k]*5))*100):50);
+  const total=Object.values(scores).reduce((a,b)=>a+b,0);
+  const arch=ARCHETYPES.find(a=>total>=a.range[0]&&total<=a.range[1])||ARCHETYPES[ARCHETYPES.length-1];
+  const sorted=PROGRAMS.map(p=>({...p,fit:p.match(pct)})).sort((a,b)=>a.fit==='h'&&b.fit!=='h'?-1:1);
+
+  const dimHTML=Object.keys(pct).map(k=>{
+    const p=pct[k],ni=p<40?0:p<70?1:2,isGold=DCLRS[k]==='#FFCB05';
+    return `<div class="ci-dim-card">
+      <div class="ci-dim-top">
+        <span class="ci-dim-label">${LABELS[k]}</span>
+        <span style="font-size:13px;font-weight:700;color:${isGold?'#7A5F00':'#00274C'};font-family:Helvetica Neue,Arial,sans-serif">${p}%</span>
+      </div>
+      <div class="ci-dbar-bg"><div class="ci-dbar-fill" style="width:${p}%;background:${DCLRS[k]}"></div></div>
+      <div class="ci-dim-note">${DNOTES[k][ni]}</div>
+    </div>`;
+  }).join('');
+
+  const progHTML=sorted.map(p=>`
+    <a class="ci-prog" href="${p.url}" target="_blank" rel="noopener">
+      <div class="ci-prog-ico" style="background:${p.fit==='h'?'#00274C':'#E8EEF6'}">
+        <i class="ti ${p.icon}" style="color:${p.fit==='h'?'#FFCB05':'#00274C'}" aria-hidden="true"></i>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div class="ci-prog-name">${p.name}</div>
+        <div class="ci-prog-why">${p.level} &middot; ${p.why}</div>
+      </div>
+      <span class="ci-fit-badge ${p.fit==='h'?'fit-h':'fit-m'}">${p.fit==='h'?'Strong fit':'Good fit'}</span>
+    </a>`).join('');
+
+  document.getElementById('results-body').innerHTML=`
+    <p class="ci-res-title">Your learner profile</p>
+    <p class="ci-res-sub">Based on your 25 answers across five dimensions of how you think, work, and grow.</p>
+    <div class="ci-arch-card">
+      <div class="ci-arch-ico"><i class="ti ${arch.icon}" aria-hidden="true"></i></div>
+      <div>
+        <div class="ci-arch-name">${arch.id}</div>
+        <div class="ci-arch-desc">${arch.desc}</div>
+      </div>
+    </div>
+    <div class="ci-dims-grid">${dimHTML}</div>
+    <p class="ci-progs-title">Programs matched to your profile</p>
+    ${progHTML}
+    <div class="ci-cta-card">
+      <p class="ci-cta-p">Ready to take the next step with Chancellor Institute?</p>
+      <div class="ci-cta-row">
+        <a class="ci-cta-a" href="https://chancellor.education" target="_blank" rel="noopener">Explore programs</a>
+        <a class="ci-cta-b" href="https://chancellor.education" target="_blank" rel="noopener">How to apply</a>
+      </div>
+    </div>
+    <div class="ci-retake"><button onclick="retake()">Retake the assessment</button></div>`;
+
+  go('s-results');
+}
+
+function retake(){cur=0;ans=Array(25).fill(null);go('s-intro');}
+</script>
+</body>
+</html>
